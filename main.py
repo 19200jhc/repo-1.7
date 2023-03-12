@@ -8,6 +8,8 @@
 '''
 import random
 print('---Battleships---')
+ps = 0
+rs = 0
 while True:
   pb = 0
   rb = 0
@@ -57,11 +59,14 @@ while True:
     print('You have',pb,'Bullets')
     print('The enemy has',rb,'Bullets')
   if end == 1:
+    ps = ps + 1
     print('You Win')
   if end == 2:
     print('You Lose')
+    rs = rs + 1
   if end == 3:
     print('Draw')
+  print('\nThe score is:\nYou: ',ps,' Enemy: ',rs,'\n')
   while True:
     ag = input('Play Again(Y/N)? ')
     if ag == 'Y' or ag == 'N':
