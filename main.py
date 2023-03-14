@@ -17,19 +17,19 @@ rs = 0
 g = 1
 while True:
   print('------ Battleships ------\n')
-  print('------- Game',g,'-------')
+  print(' ------- Game',g,'-------')
   pb = 0
   rb = 0
   Turn = 1
   end = 0
   while end == 0:
-    print('\n- Turn',Turn,'-\n')
+    print('\033[0;32m\n       - Turn',Turn,'-\n\033[0;37m')
     while True:
-      p = input('Load(L), Fire(F), or Block(B)? ')
+      p = input('\033[0;33mLoad(L)\033[0;37m, \033[0;31mFire(F)\033[0;37m, or \033[0;34mBlock(B)\033[0;37m? ')
       if p != 'L' and p != 'F' and p != 'B':
-        print('\nInvalid! Type L, F, or B!\n')
+        print('\033[1;31m\nInvalid! Type L, F, or B!\n\033[0;37m')
       elif p == 'F' and pb < 1:
-        print('You have no bullets!')
+        print('\033[1;31m\nYou have no bullets!\n\033[0;37m')
       else:
         break
     r = random.randint(1,3)
@@ -68,12 +68,12 @@ while True:
     print('The enemy has',rb,'Bullets')
   if end == 1:
     ps = ps + 1
-    print('\nYou Win')
+    print('\033[0;32m\nYou Win\033[0;37m')
   if end == 2:
-    print('\nYou Lose')
+    print('\033[0;31m\nYou Lose\033[0;37m')
     rs = rs + 1
   if end == 3:
-    print('\nDraw')
+    print('\033[0;33m\nDraw\033[0;37m')
   print('\nThe score is:\nYou: ',ps,' Enemy: ',rs,'\n')
   while True:
     ag = input('Play Again(Y/N)? ')
