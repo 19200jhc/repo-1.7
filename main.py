@@ -7,20 +7,22 @@
   TIP: Use assessment guide to help guide you through this Internal
 '''
 import random
-print('---Battleships---')
 ps = 0
 rs = 0
+g = 1
 while True:
+  print('------ Battleships ------\n')
+  print('------- Game',g,'-------')
   pb = 0
   rb = 0
   Turn = 1
   end = 0
   while end == 0:
-    print('\nTurn',Turn,'\n')
+    print('\n- Turn',Turn,'-\n')
     while True:
       p = input('Load(L), Fire(F), or Block(B)? ')
       if p != 'L' and p != 'F' and p != 'B':
-        print('Invalid')
+        print('\nInvalid! Type L, F, or B!\n')
       elif p == 'F' and pb < 1:
         print('You have no bullets!')
       else:
@@ -31,6 +33,7 @@ while True:
         r = random.randint(1,3)
       else:
         break
+    print()
     if p == 'L':
       pb = pb + 1
       print('You Loaded')
@@ -56,23 +59,25 @@ while True:
     if end > 0:
       break
     Turn = Turn + 1
-    print('You have',pb,'Bullets')
+    print('\nYou have',pb,'Bullets')
     print('The enemy has',rb,'Bullets')
   if end == 1:
     ps = ps + 1
-    print('You Win')
+    print('\nYou Win')
   if end == 2:
-    print('You Lose')
+    print('\nYou Lose')
     rs = rs + 1
   if end == 3:
-    print('Draw')
+    print('\nDraw')
   print('\nThe score is:\nYou: ',ps,' Enemy: ',rs,'\n')
   while True:
     ag = input('Play Again(Y/N)? ')
     if ag == 'Y' or ag == 'N':
       break
-    print('Invalid')
+    print('\nInvalid! Type Y or N!\n')
   if ag == 'Y':
+    g = g + 1
+    print('\n')
     continue
   else:
     break
