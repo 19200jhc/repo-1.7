@@ -7,6 +7,11 @@
   TIP: Use assessment guide to help guide you through this Internal
 '''
 import random
+f = open('boat.txt', 'r')
+content = f.read()
+print(content)
+f.close()
+print('\n')
 ps = 0
 rs = 0
 g = 1
