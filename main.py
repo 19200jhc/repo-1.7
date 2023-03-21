@@ -34,7 +34,7 @@ while True:
     print('\033[0;32m\n       - Turn',Turn,'-\n\033[0;37m')
     #input action for turn and check if valid
     while True:
-      p = input('\033[0;33mLoad(L)\033[0;37m, \033[0;31mFire(F)\033[0;37m, or \033[0;34mBlock(B)\033[0;37m? ')
+      p = input('\033[0;33mLoad(L)\033[0;37m, \033[0;31mFire(F)\033[0;37m, or \033[0;34mBlock(B)\033[0;37m? ').upper()
       if p != 'L' and p != 'F' and p != 'B':
         print('\033[1;31m\nInvalid! Type L, F, or B!\n\033[0;37m')
       elif p == 'F' and pb < 1:
@@ -93,7 +93,7 @@ while True:
   print('\nThe \033[0;34mscore\033[0;37m is:\nYou: \033[0;32m',ps,'\033[0;37m Enemy: \033[0;31m',rs,'\033[0;37m\n')
   #input new game, check if valid
   while True:
-    ag = input('Play Again(\033[0;32mY\033[0;37m/\033[0;31mN\033[0;37m)? ')
+    ag = input('Play Again(\033[0;32mY\033[0;37m/\033[0;31mN\033[0;37m)? ').upper()
     if ag == 'Y' or ag == 'N':
       break
     print('\n\033[1;31mInvalid! Type Y or N!\033[0;37m\n')
