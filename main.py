@@ -29,17 +29,15 @@ def art():
   f.close()
   print('\n')
 
-#initializing score and game variables
-ps = 0
-rs = 0
-g = 1
+#initializing list for storing score and game
+scg = [0,0,1]
 
 #main game loop
 art()
 while True:
   #header
   print('------ Battleships ------\n')
-  print(' ------- Game',g,'-------')
+  print(' ------- Game',scg[2],'-------')
   
   #initializing ammo, turn and end variables
   pb = 0
@@ -101,16 +99,16 @@ while True:
     
   #display ending, change score
   if end == 1:
-    ps = ps + 1
+    scg[0] = scg[0] + 1
     print('\033[0;32m\nYou Win\033[0;37m')
   if end == 2:
     print('\033[0;31m\nYou Lose\033[0;37m')
-    rs = rs + 1
+    scg[1] = scg[1] + 1
   if end == 3:
     print('\033[0;33m\nDraw\033[0;37m')
     
   #print score
-  print('\nThe \033[0;34mscore\033[0;37m is:\nYou: \033[0;32m',ps,'\033[0;37m Enemy: \033[0;31m',rs,'\033[0;37m\n')
+  print('\nThe \033[0;34mscore\033[0;37m is:\nYou: \033[0;32m',scg[0],'\033[0;37m Enemy: \033[0;31m',scg[1],'\033[0;37m\n')
   
   #input new game, check if valid
   while True:
@@ -121,7 +119,7 @@ while True:
     
   #repeat loop if yes, new game
   if ag == 'Y':
-    g = g + 1
+    scg[2] = scg[2] + 1
     print('\n')
     continue
     
