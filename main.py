@@ -32,8 +32,14 @@ def art():
 #initializing list for storing score and game
 scg = [0,0,1]
 
-#main game loop
+#print ascii art
 art()
+
+#instructional blurb
+print('placeholder instructions')
+print('\n')
+
+#main game loop
 while True:
   #header
   print('------ Battleships ------\n')
@@ -115,7 +121,7 @@ while True:
     ag = input('Play Again(\033[0;32mY\033[0;37m/\033[0;31mN\033[0;37m)? ').upper()
     if ag == 'Y' or ag == 'N':
       break
-    print('\n\033[1;31mInvalid! Type Y, N, or R!\033[0;37m\n')
+    print('\n\033[1;31mInvalid! Type Y or N!\033[0;37m\n')
     
   #repeat loop if yes, new game
   if ag == 'Y':
