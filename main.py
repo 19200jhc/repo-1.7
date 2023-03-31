@@ -10,30 +10,33 @@
 # libraries
 import random
 import os
+import time
 
 
 # function to input action for turn and check if valid
 def chooseaction():
-  while True:
-    print('\033[0;33mLoad(L)\033[0;37m, \033[0;31mFire(F)\033[0;37m,', end='')
-    print(' or \033[0;34mBlock(B)\033[0;37m', end='')
-    p = input('? ').upper()
-    if p != 'L' and p != 'F' and p != 'B':
-      print('\033[1;31m\nInvalid! Type L, F, or B!\n\033[0;37m')
-    elif p == 'F' and bte[0] < 1:
-      print('\033[1;31m\nYou have no bullets!\n\033[0;37m')
-    else:
-      break
-  return p
+    while True:
+        print(
+          '\033[0;33mLoad(L)\033[0;37m, \033[0;31mFire(F)\033[0;37m,', end=''
+        )
+        print(' or \033[0;34mBlock(B)\033[0;37m', end='')
+        p = input('? ').upper()
+        if p != 'L' and p != 'F' and p != 'B':
+            print('\033[1;31m\nInvalid! Type L, F, or B!\n\033[0;37m')
+        elif p == 'F' and bte[0] < 1:
+            print('\033[1;31m\nYou have no bullets!\n\033[0;37m')
+        else:
+            break
+    return p
 
 
 # ascii art function
 def art():
-  f = open('boat.txt', 'r')
-  content = f.read()
-  print(content)
-  f.close()
-  print('\n')
+    f = open('boat.txt', 'r')
+    content = f.read()
+    print(content)
+    f.close()
+    print('\n')
 
 # initializing list for storing score and game
 scg = [0, 0, 1]
@@ -68,100 +71,103 @@ print('\n')
 
 # main game loop
 while True:
-  os.system('clear')
-  # header
-  print('------ Battleships ------\n')
-  print(' ------- Game', scg[2], '-------')
+    os.system('clear')
+    # header
+    print('------ Battleships ------\n')
+    print(' ------- Game', scg[2], '-------')
 
-  # initializing ammo, turn and end variables
-  Turn = 1
-  bte = [0, 0, 0]
+    # initializing ammo, turn and end variables
+    Turn = 1
+    bte = [0, 0, 0]
 
-  # single turn loop
-  while bte[2] == 0:
-    # print turn number
-    print('\033[0;32m\n       - Turn', Turn, '-\n\033[0;37m')
+    # single turn loop
+    while bte[2] == 0:
+        # print turn number
+        print('\033[0;32m\n       - Turn', Turn, '-\n\033[0;37m')
 
-    # choose action
-    p = chooseaction()
+        # choose action
+        p = chooseaction()
 
-    # random number for enemy turn
-    r = random.randint(1, 3)
-
-    # check if valid
-    while True:
-      if r == 2 and bte[1] < 1:
+        # random number for enemy turn
         r = random.randint(1, 3)
-      else:
+
+        # check if valid
+        while True:
+            if r == 2 and bte[1] < 1:
+                r = random.randint(1, 3)
+            else:
+                break
+        print()
+
+        # print actions taken on turn
+        if p == 'L':
+            bte[0] = bte[0] + 1
+            print('You \033[0;33mLoaded\033[0;37m')
+        if r == 1:
+            bte[1] = bte[1] + 1
+            print('The Enemy \033[0;33mLoaded\033[0;37m')
+        if p == 'B':
+            print('You \033[0;34mBlocked\033[0;37m')
+        if r == 3:
+            print('The Enemy \033[0;34mBlocked\033[0;37m')
+        if p == 'F':
+            print('You \033[0;31mFired\033[0;37m')
+            bte[0] = bte[0] - 1
+            if r == 1:
+                bte[2] = 1
+        if r == 2:
+            bte[1] = bte[1] - 1
+            print('The Enemy \033[0;31mFired\033[0;37m')
+            if p == 'L':
+                bte[2] = 2
+            if p == 'F':
+                bte[2] = 3
+
+        # check if game ended
+        if bte[2] > 0:
+            break
+
+        # new turn, print amount of ammo
+        Turn = Turn + 1
+        print('\nYour \033[0;33mammunition\033[0;37m:\033[0;36m', bte[0])
+        print('\033[0;37mThe enemy\'s \033[0;33mammunition', end='')
+        print('\033[0;37m:\033[0;36m', bte[1])
+
+    # display ending, change score
+    if bte[2] == 1:
+        scg[0] = scg[0] + 1
+        print('\033[0;32m\nYou Win!\033[0;37m')
+    if bte[2] == 2:
+        print('\033[0;31m\nYou Lose!\033[0;37m')
+        scg[1] = scg[1] + 1
+    if bte[2] == 3:
+        print('\033[0;33m\nDraw!\033[0;37m')
+
+    # print score
+    print('\nThe \033[0;34mscore\033[0;37m is:')
+    print('You: \033[0;32m', scg[0], '\033[0;37m', end=' ')
+    print('Enemy: \033[0;31m', scg[1], '\033[0;37m\n')
+
+    # input new game, check if valid
+    while True:
+        ag = input(
+            'Play Again(\033[0;32mY\033[0;37m/\033[0;31mN\033[0;37m)? '
+        ).upper()
+        if ag == 'Y' or ag == 'N':
+            break
+        print('\n\033[1;31mInvalid! Type Y or N!\033[0;37m\n')
+
+    # repeat loop if yes, new game
+    if ag == 'Y':
+        scg[2] = scg[2] + 1
+        print('\n')
+        continue
+
+    # else break loop, say goodbye
+    else:
         break
-    print()
 
-    # print actions taken on turn
-    if p == 'L':
-      bte[0] = bte[0] + 1
-      print('You \033[0;33mLoaded\033[0;37m')
-    if r == 1:
-      bte[1] = bte[1] + 1
-      print('The Enemy \033[0;33mLoaded\033[0;37m')
-    if p == 'B':
-      print('You \033[0;34mBlocked\033[0;37m')
-    if r == 3:
-      print('The Enemy \033[0;34mBlocked\033[0;37m')
-    if p == 'F':
-      print('You \033[0;31mFired\033[0;37m')
-      bte[0] = bte[0] - 1
-      if r == 1:
-        bte[2] = 1
-    if r == 2:
-      bte[1] = bte[1] - 1
-      print('The Enemy \033[0;31mFired\033[0;37m')
-      if p == 'L':
-        bte[2] = 2
-      if p == 'F':
-        bte[2] = 3
-
-    # check if game ended
-    if bte[2] > 0:
-      break
-
-    # new turn, print amount of ammo
-    Turn = Turn + 1
-    print('\nYour \033[0;33mammunition\033[0;37m:\033[0;36m', bte[0])
-    print('\033[0;37mThe enemy\'s \033[0;33mammunition', end='')
-    print('\033[0;37m:\033[0;36m', bte[1])
-
-  # display ending, change score
-  if bte[2] == 1:
-    scg[0] = scg[0] + 1
-    print('\033[0;32m\nYou Win!\033[0;37m')
-  if bte[2] == 2:
-    print('\033[0;31m\nYou Lose!\033[0;37m')
-    scg[1] = scg[1] + 1
-  if bte[2] == 3:
-    print('\033[0;33m\nDraw!\033[0;37m')
-
-  # print score
-  print('\nThe \033[0;34mscore\033[0;37m is:')
-  print('You: \033[0;32m', scg[0], '\033[0;37m', end=' ')
-  print('Enemy: \033[0;31m', scg[1], '\033[0;37m\n')
-
-  # input new game, check if valid
-  while True:
-    ag = input(
-      'Play Again(\033[0;32mY\033[0;37m/\033[0;31mN\033[0;37m)? '
-    ).upper()
-    if ag == 'Y' or ag == 'N':
-      break
-    print('\n\033[1;31mInvalid! Type Y or N!\033[0;37m\n')
-
-  # repeat loop if yes, new game
-  if ag == 'Y':
-    scg[2] = scg[2] + 1
-    print('\n')
-    continue
-
-  # else break loop, say goodbye
-  else:
-    break
-
+print('\nOkay, maybe next time!')
+time.sleep(3)
+os.system('clear')
 print('\nOkay, maybe next time!')
