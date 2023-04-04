@@ -38,6 +38,7 @@ def art():
     f.close()
     print('\n')
 
+
 # initializing list for storing score and game
 scg = [0, 0, 1]
 
@@ -103,18 +104,18 @@ while True:
         if p == 'L':
             bte[0] = bte[0] + 1
             print('You \033[0;33mLoaded\033[0;37m')
-        if r == 1:
-            bte[1] = bte[1] + 1
-            print('The Enemy \033[0;33mLoaded\033[0;37m')
         if p == 'B':
             print('You \033[0;34mBlocked\033[0;37m')
-        if r == 3:
-            print('The Enemy \033[0;34mBlocked\033[0;37m')
         if p == 'F':
             print('You \033[0;31mFired\033[0;37m')
             bte[0] = bte[0] - 1
             if r == 1:
                 bte[2] = 1
+        if r == 1:
+            bte[1] = bte[1] + 1
+            print('The Enemy \033[0;33mLoaded\033[0;37m')
+        if r == 3:
+            print('The Enemy \033[0;34mBlocked\033[0;37m')
         if r == 2:
             bte[1] = bte[1] - 1
             print('The Enemy \033[0;31mFired\033[0;37m')
@@ -167,7 +168,14 @@ while True:
     else:
         break
 
-print('\nOkay, maybe next time!')
-time.sleep(3)
 os.system('clear')
 print('\nOkay, maybe next time!')
+time.sleep(4)
+os.system('clear')
+print('\033[1;34mBattleships\033[0;37m\n')
+time.sleep(1.5)
+print('By \033[0;33mAlex Scarlett\033[0;37m\n')
+time.sleep(1.5)
+print('Made with Replit\n')
+time.sleep(2)
+print('\n\033[1;32mThanks for Playing')
